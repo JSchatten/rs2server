@@ -1,3 +1,7 @@
+***
+This repository has been moved to Codeberg, if there are any changes, they will be made [there](https://codeberg.org/FOTempel/rs2server).
+***
+
 # Introduction
 This repository is provided "as-is". Tweaking will be necessary to make it fit your particular environment or situation.
 
