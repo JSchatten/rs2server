@@ -1,21 +1,31 @@
-FROM cm2network/steamcmd:latest
+FROM cm2network/steamcmd:steam-bookworm
 
 USER root
 
 ADD ./rs2server.sh /
 RUN chmod +x /rs2server.sh
 
-RUN apt-get update && apt-get -y install --no-install-recommends wget locales procps && touch /etc/locale.gen &&       echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen &&   locale-gen &&   apt-get -y install --reinstall ca-certificates &&      rm -rf /var/lib/apt/lists/*
+RUN apt-get update 
+RUN apt-get -y install --no-install-recommends wget locales procps 
+RUN touch /etc/locale.gen 
+RUN echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen 
+RUN locale-gen 
+RUN apt-get -y install --reinstall ca-certificates 
+# RUN rm -rf /var/lib/apt/lists/*
 
-RUN dpkg --add-architecture i386 && apt-get update && apt -y install gnupg2 software-properties-common libcurl4
+RUN dpkg --add-architecture i386
+RUN apt-get update 
+RUN apt-get -y install gnupg2 software-properties-common libcurl4 ca-certificates
 
 
-RUN wget -qO - https://dl.winehq.org/wine-builds/winehq.key | gpg --dearmor > /etc/apt/trusted.gpg.d/wine.gpg 
-RUN wget -qO - https://download.opensuse.org/repositories/Emulators:/Wine:/Debian/Debian_11/Release.key | gpg --dearmor > /etc/apt/trusted.gpg.d/suse.gpg
+RUN mkdir -p /etc/apt/keyrings 
 
-RUN apt-add-repository https://dl.winehq.org/wine-builds/debian/ 
-RUN echo "deb http://download.opensuse.org/repositories/Emulators:/Wine:/Debian/Debian_11 ./" > /etc/apt/sources.list.d/wine-obs.list 
-RUN apt-get update && apt -y install --install-recommends xvfb winehq-staging && apt-get -y --purge remove software-properties-common gnupg2 && apt-get -y autoremove && rm -rf /var/lib/apt/lists/*
+RUN wget -O /etc/apt/keyrings/winehq-archive.key https://dl.winehq.org/wine-builds/winehq.key
+RUN echo "deb [signed-by=/etc/apt/keyrings/winehq-archive.key] https://dl.winehq.org/wine-builds/debian bookworm main" | tee /etc/apt/sources.list.d/winehq.list
+RUN apt-get update 
+RUN apt-get -y install --install-recommends winehq-stable xvfb
+RUN apt-get -y --purge remove software-properties-common gnupg2 
+RUN apt-get -y autoremove && rm -rf /var/lib/apt/lists/*
 
 ENV LANG=en_US.UTF-8
 ENV LANGUAGE=en_US:en
