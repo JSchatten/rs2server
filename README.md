@@ -27,3 +27,22 @@ This repository can be used a guideline and it assumes you know what you're doin
 ## Working receipt
 
 <https://wildserver.ru/category/soft/wine-install/>
+
+## НЕЙРОНКА РЕКОМЕНДОВАЛА
+
+sudo rm -f /tmp/.X11-unix/.lock
+sudo rm -f /tmp/.X1-lock
+sudo rm -f /tmp/.X10-lock
+
+### Запускаем Xvfb на переднем плане — будем ждать готовности дисплея :1
+
+sudo Xvfb :1 -screen 0 800x600x24
+
+sudo Xvfb :1 -screen 0 800x600x24 2>&1 &
+
+export DISPLAY=:1
+export WINEDLLOVERRIDES="mscoree,mshtml="
+
+### Запуск самого сервера
+
+wine /RS2/server/Binaries/Win64/VNGame.exe VNTE-CuChi
