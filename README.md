@@ -14,7 +14,7 @@ This repository can be used a guideline and it assumes you know what you're doin
 2) edit docker-compose/docker-compose.yaml to suit your needs
 3) edit nginx/* to suit your needs.
 4) `docker build -t rs2server:latest .`
-5) `docker-compose -f docker-compose/docker-compose.yaml up -d && docker logs -f rs2server`
+5) `docker-compose -f docker-compose.yaml up -d && docker logs -f rs2server`
 6) You should see some output, hope it works
 
 ## Points to consider
@@ -46,3 +46,9 @@ export WINEDLLOVERRIDES="mscoree,mshtml="
 ### Запуск самого сервера
 
 wine /RS2/server/Binaries/Win64/VNGame.exe VNTE-CuChi
+
+### Docker
+
+docker compose -f docker-compose.yaml down
+
+docker exec -it rs2server /bin/bash
