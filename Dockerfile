@@ -49,6 +49,6 @@ WORKDIR /home/steam
 
 COPY rs2server.txt /home/steam/rs2server.txt
 
-# ENTRYPOINT ["/rs2server.sh"]
-# CMD ["/bin/bash"]
-CMD sleep 15000
+ENTRYPOINT ["/rs2server.sh"]
+CMD ["/bin/bash"]
+# CMD sleep 15000
