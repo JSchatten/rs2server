@@ -1,14 +1,4 @@
 services:
-  # proxy:
-  #   container_name: proxy
-  #   hostname: proxy
-  #   image: nginx:latest
-  #   ports:
-  #     - 80:80
-  #     - 443:443
-  #   volumes:
-  #     - ./nginx_config:/etc/nginx
-  #     - ./static_content:/var/www
   rs2server:
     container_name: rs2server
     hostname: rs2server
@@ -21,11 +11,3 @@ services:
     volumes:
       - ./RS2:/RS2
       - ./steam:/home/steam/.local/share/Steam
-    # networks:
-    #   - common_network
-
-
-# networks:
-#   common_network:
-#     external:
-#       true
