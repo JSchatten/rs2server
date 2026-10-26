@@ -3,6 +3,7 @@ services:
     container_name: rs2server
     hostname: rs2server
     image: rs2server:latest
+    restart: always
     network_mode : "host"
     # ports:
     #   - 7777:7777/udp
